@@ -1,11 +1,62 @@
-<div align="center">
+# ZPL Label Printer
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+![ZPL Label Printer Screenshot](./screenshot.png)
 
-  <h1>Built with AI Studio</h2>
+A web application to print PDFs and images (PNG, JPG, WEBP) directly to Zebra (ZPL) label printers over the local network (TCP port 9100).
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Features
+- **Drag & Drop:** Easily upload PDFs and images.
+- **Auto-trim:** Automatically removes excess whitespace around labels.
+- **Auto-rotation & Scaling:** Automatically rotates to portrait mode and scales the image to a 4x6 inch format (shipping labels) with a neat 5mm margin.
+- **Direct Printing:** Print directly to network printers via Raw TCP (port 9100).
+- **ZPL Download:** Ability to download the generated ZPL code for debugging.
+- **Multi-language Support:** Available in English, Dutch, German, French, and Spanish.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Installation & Local Usage
 
-</div>
+Because the application communicates with the printer via Raw TCP (port 9100), the backend (Node.js) must have access to the same network as the printer.
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd zpl-labelprinter
+   ```
+
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+3. (Optional) Set a default printer:
+   Copy `.env.example` to `.env` and fill in your default printer IP:
+   ```env
+   VITE_PRINTER_HOST=192.168.1.100
+   VITE_PRINTER_PORT=9100
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   The application is now accessible at `http://localhost:3000`.
+
+## Production (Deployment)
+
+If you want to host the application on your own server (e.g., a Raspberry Pi or local server in your warehouse):
+
+1. Build the frontend:
+   ```bash
+   npm run build
+   ```
+
+2. Start the production server:
+   ```bash
+   npm run start
+   ```
+   *Note: The server runs on port 3000. You can use a reverse proxy (like Nginx or Apache) to make it available via port 80/443.*
+
+## Architecture
+- **Frontend:** React, Tailwind CSS, Vite
+- **Backend:** Express (Node.js) for TCP socket communication
+- **PDF Processing:** PDF.js
+- **ZPL Conversion:** Custom binarization and hex encoding (via HTML5 Canvas)

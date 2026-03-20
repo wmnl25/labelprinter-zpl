@@ -1,0 +1,5 @@
+{
+  "name": "ZPL Label Printer",
+  "description": "A web application for printing PDFs and images (PNG, JPG, WEBP) directly to Zebra (ZPL) label printers via the local network (TCP port 9100).",
+  "requestFramePermissions": []
+}
