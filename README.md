@@ -1,6 +1,6 @@
 # ZPL Label Printer
 
-![ZPL Label Printer Screenshot](./screenshot.png)
+![ZPL Label Printer Screenshot](screenshot.png)
 
 A web application to print PDFs and images (PNG, JPG, WEBP) directly to Zebra (ZPL) label printers over the local network (TCP port 9100).
 
